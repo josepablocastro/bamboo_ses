@@ -104,8 +104,12 @@ defmodule Bamboo.SesAdapter.RFC2822Renderer do
   defp render_header_value(address_type, address) when address_type in @address_types,
     do: render_address(address)
 
-  defp render_header_value("Content-Transfer-Encoding" = key, _value) do
-    value = String.replace("binary", "_", "-")
+  defp render_header_value("Content-Transfer-Encoding" = key, value) when is_atom(value) do
+    value =
+      value
+      |> Atom.to_string()
+      |> String.replace("_", "-")
+
     render_header_value(key, value)
   end
 
@@ -218,7 +222,7 @@ defmodule Bamboo.SesAdapter.RFC2822Renderer do
     end
   end
 
-  defp encode(body, _message) do
-    Mail.Encoder.encode(body, "binary")
+  defp encode(body, message) do
+    Mail.Encoder.encode(body, Mail.Message.get_header(message, "content-transfer-encoding"))
   end
 end

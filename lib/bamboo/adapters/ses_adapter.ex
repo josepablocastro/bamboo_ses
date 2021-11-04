@@ -30,7 +30,7 @@ defmodule Bamboo.SesAdapter do
          |> Mail.put_to(prepare_addresses(email.to))
          |> Mail.put_cc(prepare_addresses(email.cc))
          |> Mail.put_bcc(prepare_addresses(email.bcc))
-         |> Mail.put_subject(q_encode(email.subject))
+         |> Mail.put_subject(email.subject)
          |> put_headers(email.headers)
          |> put_text(email.text_body)
          |> put_html(email.html_body)
