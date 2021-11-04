@@ -222,7 +222,7 @@ defmodule Bamboo.SesAdapter.RFC2822Renderer do
     end
   end
 
-  defp encode(body, message) do
-    Mail.Encoder.encode(body, Mail.Message.get_header(message, "content-transfer-encoding"))
+  defp encode(body, _message) do
+    Mail.Encoder.encode(body, "UTF-8")
   end
 end
