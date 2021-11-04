@@ -77,16 +77,13 @@ defmodule Bamboo.SesAdapter do
   defp put_text(message, nil), do: message
 
   defp put_text(message, body) do
-    message
-    |> Mail.put_text(body)
-    |> Mail.Message.put_header("Content-Type", "text/plain;charset=UTF-8")
+    Mail.put_text(message, body, charset: "UTF-8")
   end
 
   defp put_html(message, nil), do: message
 
   defp put_html(message, body) do
-    Mail.put_html(message, body)
-    |> Mail.Message.put_header("Content-Type", "text/html;charset=UTF-8")
+    Mail.put_html(message, body, charset: "UTF-8")
   end
 
   @doc """
