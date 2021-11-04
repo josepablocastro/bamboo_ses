@@ -105,7 +105,7 @@ defmodule Bamboo.SesAdapter.RFC2822Renderer do
     do: render_address(address)
 
   defp render_header_value("Content-Transfer-Encoding" = key, _value) do
-    value = String.replace("UTF-8", "_", "-")
+    value = String.replace("binary", "_", "-")
     render_header_value(key, value)
   end
 
@@ -219,6 +219,6 @@ defmodule Bamboo.SesAdapter.RFC2822Renderer do
   end
 
   defp encode(body, _message) do
-    Mail.Encoder.encode(body, "UTF-8")
+    Mail.Encoder.encode(body, "binary")
   end
 end
