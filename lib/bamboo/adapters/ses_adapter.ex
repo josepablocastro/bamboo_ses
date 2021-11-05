@@ -72,7 +72,7 @@ defmodule Bamboo.SesAdapter do
       message,
       fn attachment, message ->
         headers =
-          if attachment.content_id do
+          if Map.has_key?(attachment, :content_id) do
             [content_id: attachment.content_id]
           else
             []
